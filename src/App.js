@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  
+  const [fact,setFact] = useState("");
+
+  const updateFact = () =>{
+    fetch("https://catfact.ninja/fact").then((response)=>response.json()).then((data)=>{
+      setFact(data.fact);
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bg-black w-screen h-screen">
+
+      <button onClick={updateFact} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg py-1 px-2 mt-1">Show cat fact</button>
+      <br />
+      <h1 className="mt-10 text-lg text-white animate-pulse">{fact}</h1>
     </div>
   );
 }
